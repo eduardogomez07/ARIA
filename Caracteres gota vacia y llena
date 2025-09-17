@@ -1,0 +1,41 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// Set the LCD address to 0x27 in PCF8574 by NXP and Set to 0x3F in PCF8574A by Ti
+LiquidCrystal_I2C lcd(0x27,16,2);
+
+byte customChar[] = {
+  0x04,
+  0x04,
+  0x0E,
+  0x1F,
+  0x1F,
+  0x1F,
+  0x0E,
+  0x00
+};
+byte customChar2[] = {
+  0x04,
+  0x04,
+  0x0E,
+  0x11,
+  0x11,
+  0x11,
+  0x0E,
+  0x00
+};
+
+
+void setup() {
+  lcd.init();
+  lcd.backlight();
+  lcd.createChar(0, customChar);
+lcd.createChar(1, customChar2);
+  lcd.home();
+  lcd.write(0);
+lcd.setCursor(1,1);
+lcd.write(1);
+  
+}
+
+void loop() { }
