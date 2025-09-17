@@ -1,0 +1,43 @@
+#include <LiquidCrystal_I2C.h>
+
+// Sketch 1: LCD con módulo conversor I2C
+LiquidCrystal_I2C lcd(0x27,16,2);// set the LCD address to 0x27 for a 16 chars and 2 line display
+
+void setup()
+{
+  pinMode(13, OUTPUT);
+  lcd.init();                      // initialize the lcd 
+  // Print a message to the LCD.
+  lcd.backlight();   //prendemos la luz de fondo
+  lcd.setCursor(2,0);  //posicionar el cursor de la pantalla
+  lcd.print("Smart Maceta");
+  lcd.setCursor(0,1);
+lcd.print("ARIA - 2025");
+    delay(1000);
+lcd.clear();
+   lcd.setCursor(2,0);  //posicionar el cursor de la pantalla
+  lcd.print("17/09/25");
+  delay(500);
+  lcd.clear();
+}
+void loop()
+{
+  int lectura=analogRead(A0);
+   lcd.setCursor(0,1);
+  lcd.print("% Hum: ");
+  float porcentaje=lectura*(100/876.0);
+  lcd.print(porcentaje);
+  if (porcentaje<30)
+  {
+   
+    lcd.setCursor(0,0);
+    lcd.print("REGANDO...");
+    digitalWrite(13,HIGH);}
+  else
+  {lcd.setCursor(0,0);
+   lcd.print("ESTOY BIEN");
+    digitalWrite(13, LOW);}
+}
+    
+  
+  
